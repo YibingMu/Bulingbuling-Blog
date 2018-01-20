@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const path = require('path');
+const bodyParser = require('body-parser');
+const auth = require('./routes/auth');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.uri, (err) => {
@@ -13,11 +15,17 @@ mongoose.connect(config.uri, (err) => {
   }
 });
 
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 app.use(express.static(__dirname + '/client/dist/'));
+
+app.use('/auth', auth);
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/dist/index.html'));
 });
 
 app.listen(8080, () => {
-  console.log('Lisenting to 8080');
+  console.log('Listening to 8080');
 });
