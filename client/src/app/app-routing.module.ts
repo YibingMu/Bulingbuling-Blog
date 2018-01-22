@@ -2,10 +2,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NavbarComponent} from "./components/navbar/navbar.component";
 import { HomeComponent } from './components/home/home.component'
+import { RegisterComponent } from "./components/register/register.component";
 
 const appRoutes: Routes = [
   { path: '',
-    component : HomeComponent},
+    component : HomeComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  }
 ];
 
 @NgModule({
