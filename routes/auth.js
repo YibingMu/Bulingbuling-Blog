@@ -47,4 +47,40 @@ router.post('/register', (req, res) => {
     }
 });
 
+router.get('/checkEmail/:email', (req, res) => {
+    if (!req.params.email) {
+        res.json({success: false, message: 'No E-mail provided'})
+    } else {
+        User.findOne({email: req.params.emial}, (err, user) => {
+            if (err) {
+                res.json({success: false, message: 'Something went wrong' + err})
+            } else {
+                if (user) {
+                    res.json({success: false, message: 'This E-mail is already taken'})
+                } else {
+                    res.json({success: true, message: 'This E-mail is available'})
+                }
+            }
+        });
+    }
+});
+
+router.get('/checkUsername/:username', (req, res) => {
+    if (!req.params.username) {
+        res.json({success: false, message: 'No Username provided'})
+    } else {
+        User.findOne({username: req.params.username}, (err, user) => {
+            if (err) {
+                res.json({success: false, message: 'Something went wrong' + err})
+            } else {
+                if (user) {
+                    res.json({success: false, message: 'This Username is already taken'})
+                } else {
+                    res.json({success: true, message: 'This Username is available'})
+                }
+            }
+        });
+    }
+});
+
 module.exports = router;

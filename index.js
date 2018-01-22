@@ -5,6 +5,7 @@ const config = require('./config/database');
 const path = require('path');
 const bodyParser = require('body-parser');
 const auth = require('./routes/auth');
+const cors = require('cors');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.uri, (err) => {
@@ -14,6 +15,11 @@ mongoose.connect(config.uri, (err) => {
     console.log('Connect to Database: ' + config.db);
   }
 });
+
+
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
