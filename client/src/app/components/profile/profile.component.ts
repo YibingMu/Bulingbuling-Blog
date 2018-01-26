@@ -10,6 +10,7 @@ export class ProfileComponent implements OnInit {
 
   username;
   email;
+  isAdmin;
 
   constructor(
     private authService: AuthService
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
       console.log(profile['message']);
       this.username = profile['user'].username;
       this.email = profile['user'].email;
+      this.isAdmin = profile['user'].isAdmin;
     });
 
   }

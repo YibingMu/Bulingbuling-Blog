@@ -5,6 +5,7 @@ const config = require('./config/database');
 const path = require('path');
 const bodyParser = require('body-parser');
 const auth = require('./routes/auth');
+const admin = require('./routes/admin');
 const cors = require('cors');
 
 mongoose.Promise = global.Promise;
@@ -27,6 +28,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/dist/'));
 
 app.use('/auth', auth);
+
+app.use('/admin', admin);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/dist/index.html'));

@@ -108,6 +108,10 @@ const usersSchema = new mongoose.Schema({
         type: String,
         required: true,
         validate: passwordValidators
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
 
